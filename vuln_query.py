@@ -1,0 +1,47 @@
+query = """{
+  organization(login:%s){
+    url
+    name
+    repositories(first:100, after:%s){
+      totalCount
+      pageInfo{
+        hasNextPage
+        endCursor
+      }
+      nodes{
+        name
+        vulnerabilityAlerts(first:100){
+          nodes{
+            vulnerableManifestFilename
+            securityVulnerability{
+              package {
+                  name
+              }
+              firstPatchedVersion{
+                  identifier
+              }
+              vulnerableVersionRange
+              advisory{
+                summary
+                description
+                severity
+                publishedAt
+                updatedAt
+                references{
+                  url
+                }
+                id
+                databaseId
+              }
+            }
+            dismissedAt
+            dismissReason
+            dismisser{
+                name
+            }
+          }
+        }
+      }
+    }
+  }
+}"""
